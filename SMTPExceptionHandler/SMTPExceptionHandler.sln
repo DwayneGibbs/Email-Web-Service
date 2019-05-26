@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPExceptionHandler", "SMTPExceptionHandler\SMTPExceptionHandler.csproj", "{B7573EDB-B829-4891-A488-7A3B7D0892C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPapi", "SMTPExceptionHandler\SMTPapi.csproj", "{B7573EDB-B829-4891-A488-7A3B7D0892C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPExceptionHandler.Tests", "SMTPExceptionHandler.Tests\SMTPExceptionHandler.Tests.csproj", "{9A913881-CF87-4F3D-AAA4-D160A042C8AB}"
 EndProject

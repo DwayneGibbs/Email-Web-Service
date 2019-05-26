@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SMTPExceptionHandler\SMTPExceptionHandler.csproj">
+    <ProjectReference Include="..\SMTPExceptionHandler\SMTPapi.csproj">
       <Project>{B7573EDB-B829-4891-A488-7A3B7D0892C1}</Project>
-      <Name>SMTPExceptionHandler</Name>
+      <Name>SMTPapi</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
