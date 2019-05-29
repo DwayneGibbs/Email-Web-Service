@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
 
 namespace SMTPapi.Services
 {
@@ -13,24 +10,31 @@ namespace SMTPapi.Services
         private string SMTPUsername;
         private string SMTPPassword;
         private string SMTPPort;
+        private string DeployedEnvironment;
+        private string SMTPSubject;
 
-        private SendUsingGMAIL() {
-            
+        public SendUsingGMAIL() {
+            SMTPUsername = System.Configuration.ConfigurationManager.AppSettings["SMTPUsername"].ToString();
+            SMTPPassword = System.Configuration.ConfigurationManager.AppSettings["SMTPPassword"].ToString();
+            SMTPPort = System.Configuration.ConfigurationManager.AppSettings["SMTPPort"].ToString();
+            DeployedEnvironment = System.Configuration.ConfigurationManager.AppSettings["DeployedEnvironment"].ToString();
+            SMTPSubject = "************" + DeployedEnvironment + "************";
         }
 
-        public string SendMail(string toList, string from, string ccList, string subject, string body)
+        public bool SendMail(string priority, string body)
         {
             MailMessage message = new MailMessage();
             SmtpClient smtpClient = new SmtpClient();
-            string msg = string.Empty;
+
             try
             {
-                MailAddress fromAddress = new MailAddress(from);
+                MailAddress fromAddress = new MailAddress(SendMessageFrom);
                 message.From = fromAddress;
-                message.To.Add(toList);
-                if (ccList != null && ccList != string.Empty)
-                    message.CC.Add(ccList);
-                message.Subject = subject;
+                if (priority == "High")
+                    message.Priority = MailPriority.High;
+                else
+                    message.Priority = MailPriority.Normal;
+                message.Subject = SMTPSubject;
                 message.IsBodyHtml = true;
                 message.Body = body;
                 // We use gmail as our smtp client
@@ -39,16 +43,17 @@ namespace SMTPapi.Services
                 smtpClient.EnableSsl = true;
                 smtpClient.UseDefaultCredentials = true;
                 smtpClient.Credentials = new System.Net.NetworkCredential(
-                    "Your Gmail User Name", "Your Gmail Password");
+                    SMTPUsername, SMTPPassword);
 
                 smtpClient.Send(message);
-                msg = "Successful<BR>";
+
+                return true;
             }
             catch (Exception ex)
             {
-                msg = ex.Message;
-            }
-            return msg;
+                string errMsg = ex.Message;
+                return false;
+            }            
         }
     }
 }
