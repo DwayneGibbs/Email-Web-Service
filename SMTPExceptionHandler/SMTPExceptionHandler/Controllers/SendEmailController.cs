@@ -14,7 +14,7 @@ namespace SMTPapi.Controllers
         public void Post([FromBody]EmailMessageDto emailMessageDto)
         {
             Services.SendUsingGMAIL normalEmail = new Services.SendUsingGMAIL();
-            normalEmail.SendMail("Normal", emailMessageDto.HtmlBody);
+            normalEmail.SendMail(emailMessageDto.Application, "Normal", emailMessageDto.HtmlBody);
         }
     }
 }
