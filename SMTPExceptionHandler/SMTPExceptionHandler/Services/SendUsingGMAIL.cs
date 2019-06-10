@@ -18,14 +18,19 @@ namespace SMTPapi.Services
             SMTPPassword = System.Configuration.ConfigurationManager.AppSettings["SMTPPassword"].ToString();
             SMTPPort = System.Configuration.ConfigurationManager.AppSettings["SMTPPort"].ToString();
             DeployedEnvironment = System.Configuration.ConfigurationManager.AppSettings["DeployedEnvironment"].ToString();
-            SMTPSubject = "************" + DeployedEnvironment + "************";
+            
         }
 
-        public bool SendMail(string priority, string body)
+        public bool SendMail(string ApplicationName, string priority, string body)
         {
             MailMessage message = new MailMessage();
             SmtpClient smtpClient = new SmtpClient();
-
+            
+            if(priority == "Normal")
+                SMTPSubject = "************" + DeployedEnvironment + "___" + ApplicationName + "__" + DeployedEnvironment + "************";
+            else
+                SMTPSubject = "*** ERROR ***" + DeployedEnvironment + "___" + ApplicationName + "__" + DeployedEnvironment + "*** ERROR ***";
+            
             try
             {
                 MailAddress fromAddress = new MailAddress(SendMessageFrom);
