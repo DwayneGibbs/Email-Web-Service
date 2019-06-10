@@ -13,7 +13,8 @@ namespace SMTPapi.Controllers
         // POST api/<controller>
         public void Post([FromBody]EmailMessageDto emailMessageDto)
         {
-
+            Services.SendUsingGMAIL errorEmail = new Services.SendUsingGMAIL();
+            errorEmail.SendMail("High", emailMessageDto.HtmlBody);
         }
     }
 }
