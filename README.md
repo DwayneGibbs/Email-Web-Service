@@ -1,2 +1,2 @@
 # EMAIL Web Service
-This project is an email web service that allows regular and error emails to be sent as an SMTP Exception handler.
+This project is an email web service that is intended to be used to send regular and error emails.
